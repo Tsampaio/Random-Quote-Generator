@@ -36,10 +36,12 @@ console.log("My random number is: ", randomNumber);
 
 // Create the getRandomQuuote function and name it getRandomQuote
 
-let getRandomQuote = (array) => {
+const getRandomQuote = (array, index) => {
+    console.log(index);
+    return  array[index].quote;
+}
 
-
-} 
+console.log(getRandomQuote(quotes, randomNumber));
 
 // Create the printQuote funtion and name it printQuote
 
