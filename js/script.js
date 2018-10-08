@@ -6,7 +6,7 @@ const quotes = [
     {
         quote: "Twenty years from now you will be more disappointed by the things that you didn’t do than by the ones you did do.",
         source: "Mark Twain",
-        citation: "",
+        citation: "Shark Tank",
         year: ""
     },
     {
@@ -30,23 +30,30 @@ const quotes = [
 ];
 
 const arraySize = quotes.length;
-let randomNumber = Math.floor(Math.random() * arraySize);
 
-console.log("My random number is: ", randomNumber);
+const randomNumber = (limit) => {
+    return Math.floor(Math.random() * limit);
+}
 
 // Create the getRandomQuuote function and name it getRandomQuote
 
 const getRandomQuote = (array, index) => {
-    console.log(index);
-    return  array[index].quote;
+    return  array[index];
 }
 
-console.log(getRandomQuote(quotes, randomNumber));
+let printQuote = () => {
 
-// Create the printQuote funtion and name it printQuote
+    let number = randomNumber(arraySize);
+    console.log("My random number is: ", number);
 
+    let newCitation = getRandomQuote(quotes, number).citation ? `<span class="citation">${getRandomQuote(quotes, number).citation}</span>` : "";
+    let newYear = getRandomQuote(quotes, number).year ? `<span class="year">${getRandomQuote(quotes, number).year}</span>` : "";
+
+    document.querySelector(".quote").innerText = getRandomQuote(quotes, number).quote;
+    document.querySelector(".source").innerHTML = getRandomQuote(quotes, number).source + " " + newCitation + " " + newYear;
+}
 
 
 // This event listener will respond to "Show another quote" button clicks
 // when user clicks anywhere on the button, the "printQuote" function is called
-// document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+document.getElementById('loadQuote').addEventListener("click", printQuote, false);
