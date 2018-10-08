@@ -6,8 +6,8 @@ const quotes = [
     {
         quote: "Twenty years from now you will be more disappointed by the things that you didn’t do than by the ones you did do.",
         source: "Mark Twain",
-        citation: "Shark Tank",
-        year: ""
+        citation: "",
+        year: "2012"
     },
     {
         quote: "Don’t be intimidated by what you don’t know. That can be your greatest strength and ensure that you do things differently from everyone else.",
@@ -37,20 +37,27 @@ const randomNumber = (limit) => {
 
 // Create the getRandomQuuote function and name it getRandomQuote
 
-const getRandomQuote = (array, index) => {
-    return  array[index];
+const getRandomQuote = (array) => {
+    let number = randomNumber(arraySize);
+
+    console.log("My random number is: ", number);
+
+    return  array[number];
 }
 
 let printQuote = () => {
 
-    let number = randomNumber(arraySize);
-    console.log("My random number is: ", number);
+    let myObj = getRandomQuote(quotes);
 
-    let newCitation = getRandomQuote(quotes, number).citation ? `<span class="citation">${getRandomQuote(quotes, number).citation}</span>` : "";
-    let newYear = getRandomQuote(quotes, number).year ? `<span class="year">${getRandomQuote(quotes, number).year}</span>` : "";
-
-    document.querySelector(".quote").innerText = getRandomQuote(quotes, number).quote;
-    document.querySelector(".source").innerHTML = getRandomQuote(quotes, number).source + " " + newCitation + " " + newYear;
+    let stringOfQuoteProperties = 
+        `<p class="quote">${myObj.quote}</p>
+        <p class="source"> ${myObj.source}
+            ${myObj.citation ? `<span class="citation">${myObj.citation}</span>` : ""}
+            ${myObj.year ? `<span class="year">${myObj.year}</span>` : ""}
+        </p>`;
+    
+    document.getElementById('quote-box').innerHTML = stringOfQuoteProperties;
+    
 }
 
 
