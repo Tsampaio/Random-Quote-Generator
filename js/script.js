@@ -26,29 +26,42 @@ const quotes = [
         source: "Steve Jobs",
         citation: "Apple",
         year: ""
+    },
+    {
+        quote: "Veni Vidi Veci, I came, I saw, I conquered",
+        source: "Cesar",
+        citation: "",
+        year: "800AD"
     }
 ];
 
+//getting the size of the quotes array
 const arraySize = quotes.length;
 
+//setting the arrays for the Background Colours
+const bgColour = ["royalblue", "red", "violet", "brown", "grey", "darkblue"];
+//getting the size of the bgColour array
+const bgColourSize = bgColour.length;
+
+//generating a random number with a limit number based on the size of the array. using Math.floor to round down numbers and get access to number 0 inclusive
 const randomNumber = (limit) => {
     return Math.floor(Math.random() * limit);
 }
 
-// Create the getRandomQuuote function and name it getRandomQuote
-
-const getRandomQuote = (array) => {
-    let number = randomNumber(arraySize);
-
-    console.log("My random number is: ", number);
+// Create the getRandomQuote function and name it getRandomQuote, passing the array and size as parameters
+//so we can actually get a random quote and a random background image with the same function
+const getRandomQuote = (array, size) => {
+    
+    let number = randomNumber(size);
 
     return  array[number];
 }
 
+//Printing the generated quotes to the screen
 let printQuote = () => {
 
-    let myObj = getRandomQuote(quotes);
-
+    let myObj = getRandomQuote(quotes, arraySize);
+    
     let stringOfQuoteProperties = 
         `<p class="quote">${myObj.quote}</p>
         <p class="source"> ${myObj.source}
@@ -57,8 +70,21 @@ let printQuote = () => {
         </p>`;
     
     document.getElementById('quote-box').innerHTML = stringOfQuoteProperties;
+
+    bgGenerator();
     
 }
+
+//generating a random background colour and applying it to body
+let bgGenerator = () => {
+    let myColour = getRandomQuote(bgColour, bgColourSize);
+    document.body.style.backgroundColor = myColour;
+}
+
+//every 20s the quote will change automatically and the background colour as well
+let myTimer = setInterval(printQuote, 20000);
+
+
 
 
 // This event listener will respond to "Show another quote" button clicks
