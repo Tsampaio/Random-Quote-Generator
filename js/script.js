@@ -51,7 +51,7 @@ const randomNumber = (limit) => {
 // Create the getRandomQuote function and name it getRandomQuote, passing the array and size as parameters
 //so we can actually get a random quote and a random background image with the same function
 const getRandomQuote = (array, size) => {
-    
+    //getting a random number based on the limit of the array
     let number = randomNumber(size);
 
     return  array[number];
@@ -59,7 +59,7 @@ const getRandomQuote = (array, size) => {
 
 //Printing the generated quotes to the screen
 let printQuote = () => {
-
+    //returning a random quote and save it in a variable
     let myObj = getRandomQuote(quotes, arraySize);
     
     let stringOfQuoteProperties = 
@@ -72,7 +72,6 @@ let printQuote = () => {
     document.getElementById('quote-box').innerHTML = stringOfQuoteProperties;
 
     bgGenerator();
-    
 }
 
 //generating a random background colour and applying it to body
@@ -81,12 +80,25 @@ let bgGenerator = () => {
     document.body.style.backgroundColor = myColour;
 }
 
-//every 20s the quote will change automatically and the background colour as well
-let myTimer = setInterval(printQuote, 20000);
 
+//reseting timer on click
+const timerFunc = () =>{
+    //clearing the setinterval function
+    clearInterval(window.timer);
+
+    //Calling the printQuote
+    printQuote();
+
+    //Restarting the timer
+    window.timer = setInterval(printQuote, 3000);
+
+};
+
+//every 20s the quote will change automatically and the background colour as well
+window.timer = setInterval(printQuote, 3000);
 
 
 
 // This event listener will respond to "Show another quote" button clicks
 // when user clicks anywhere on the button, the "printQuote" function is called
-document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+document.getElementById('loadQuote').addEventListener("click", timerFunc, false);
